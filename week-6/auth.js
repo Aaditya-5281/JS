@@ -50,6 +50,7 @@ app.post('/signin',(req,res)=>{
             token : user.token
         })
     }
+    console.log(users);
 })
 
 
