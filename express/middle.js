@@ -7,6 +7,7 @@ function http (req,res,next){
     const header=req.headers
     console.log(req.headers);
     console.log(req.url);
+    console.log(req.method);
     next()
 }
 
