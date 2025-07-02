@@ -4,6 +4,8 @@ const express = require('express');
 const { json } = require('stream/consumers');
 
 const app = express();
+
+/*
 let requestCount = 0;
 
 function counter (req,res,next){
@@ -29,8 +31,33 @@ app.post('/user', function(req, res) {
 app.get('/requestCount', function(req, res) {
   res.status(200).json({ requestCount });
 });
+*/
 
 
+
+function isOldEnough (req, res, next) {
+  const age = Number(req.query.age);
+  if (age >= 18) {
+    next();
+  } else {
+    res.status(403).json({ msg: "Access Denied for all Rides" });
+  }
+}
+
+app.use(isOldEnough);
+
+
+app.get('/ride1',function(req,res){
+  res.send("This is Ride 1")
+})
+
+app.get('/ride2',function(req,res){
+  res.send("This is Ride 2")
+})
+
+app.get('/ride3',function(req,res){
+  res.send("This is Ride 3")
+})
 
 
 app.listen(3000,()=>{
