@@ -12,7 +12,7 @@ const users=[{
 },{
     username:"Harsha",
     password: "456",
-    token: ""
+    token: "abcd"
 }]
 
 app.post('/signup',(req,res)=>{
@@ -54,6 +54,22 @@ app.post('/signin',(req,res)=>{
 })
 
 
+
+app.get('/me',(req,res)=>{
+    const token = req.headers['authorization'];
+    const user = users.find(user => user.token === token);
+    
+    if(user){
+        res.json({
+            user : user.username
+        })
+    }else{
+        res.status(403).send("User Unauthorized")
+    }
+    
+});
+
 app.listen(3000, ()=>{
     console.log("The server is listening");
 })
+
