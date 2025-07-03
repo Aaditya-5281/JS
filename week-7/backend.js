@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { userModel, todoModel } = require('./db'); // Make sure db.js exports userModel and todoModel
+const { userModel, todoModel } = require('./db'); 
 
 const app = express();
 app.use(express.json());
