@@ -1,8 +1,11 @@
 const express = require('express')
+const jwt = require('jsonwebtoken');
 
 const app = express()
 
 app.use(express.json())
+
+const JWT_SECRET = "aaditya"
 
 
 const users=[{
@@ -19,12 +22,13 @@ app.post('/signup',(req,res)=>{
     const username= req.body.username;
     const password= req.body.password;
     const userExists = users.find(user => user.username === username);
+    console.log(users);
 
 
     if(userExists){
         return res.status(200).send("User Exists")
     }else{
-        const token= Math.random().toString(36).substring(2)
+        const token= jwt.sign({ username }, JWT_SECRET);
         users.push({ username, password, token });
 
         return res.json({
@@ -32,6 +36,7 @@ app.post('/signup',(req,res)=>{
             msg : "You are signed Up"
         })
     }
+    
 })
 
 
@@ -39,7 +44,7 @@ app.post('/signin',(req,res)=>{
     const username= req.body.username;
     const password= req.body.password;
     const user = users.find(user => user.username === username);
-    
+    const token = jwt.sign({ username }, JWT_SECRET)
 
     if(!user){
         return res.status(404).send("User Does not exits")
@@ -47,21 +52,21 @@ app.post('/signin',(req,res)=>{
         return res.status(403).send("Password Incorrect")
     }else{
         res.json({
-            token : user.token
+            token : token
         })
     }
-    console.log(users);
 })
 
 
 
 app.get('/me',(req,res)=>{
     const token = req.headers['authorization'];
-    const user = users.find(user => user.token === token);
+    const decoded = jwt.verify(token, JWT_SECRET);
+
     
-    if(user){
+    if(decoded){
         res.json({
-            user : user.username
+            user : decoded.username
         })
     }else{
         res.status(403).send("User Unauthorized")
