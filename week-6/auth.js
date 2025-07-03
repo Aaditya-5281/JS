@@ -18,6 +18,19 @@ const users=[{
     token: "abcd"
 }]
 
+
+function auth(req, res, next) {
+    const token = req.headers['authorization'];
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded.username;  
+        next();
+    } catch (err) {
+        res.status(403).send("Unauthorized");
+    }
+}
+
+
 app.post('/signup',(req,res)=>{
     const username= req.body.username;
     const password= req.body.password;
@@ -52,26 +65,26 @@ app.post('/signin',(req,res)=>{
         return res.status(403).send("Password Incorrect")
     }else{
         res.json({
-            token : token
+            token : token,
+            msg : "You are Signed In"
         })
     }
 })
 
 
 
-app.get('/me',(req,res)=>{
-    const token = req.headers['authorization'];
-    const decoded = jwt.verify(token, JWT_SECRET);
+app.get('/me', auth, (req, res) => {
+    const currentUser = req.user;  
+    const user = users.find(user => user.username === currentUser);
 
-    
-    if(decoded){
+    if (user) {
         res.json({
-            user : decoded.username
-        })
-    }else{
-        res.status(403).send("User Unauthorized")
+            username: user.username,
+            password: user.password  
+        });
+    } else {
+        res.status(404).send("User not found");
     }
-    
 });
 
 app.listen(3000, ()=>{
