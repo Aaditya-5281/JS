@@ -1,4 +1,4 @@
-# JavaScript & Web Development Learning Resource
+# JavaScript & Web Development 
 
 Welcome to the **JS** repository! This project is organized as a comprehensive learning resource for anyone interested in JavaScript and web development. Each folder contains focused examples, exercises, and code to help you master different aspects of modern web programming.
 
