@@ -23,24 +23,52 @@
 //   console.log(naam);
 // }
 // logName(firstName)
-function user(user) {
-    console.log(`Hello ${user.firstName}`);
-}
-// Types
-let username = {
-    firstName: "Aaditya",
-    age: 20,
-};
-const a = {
-    firstName: "Aaditya",
-    goodness: "Very Good",
-};
-const b = {
-    firstName: "Harsha",
-    badness: "Very Bad",
-};
-function call(user) {
-    return user.firstName;
-}
-console.log(call(a));
-console.log(call(b));
+// function user(user: { firstName: string; age: number }): void {
+//   console.log(`Hello ${user.firstName}`);
+// }
+// // Types
+// let username = {
+//   firstName: "Aaditya",
+//   age: 20,
+// };
+// Both are Max Same , Minor Difference
+// Interfaces
+// interface username {
+//   firstName: "Aaditya",
+//   age: 20,
+// };
+// user(username);
+// interface People {
+//   firstName : string;
+//   age : number;
+//   greet() : void;
+// }
+// const people = {
+//   firstName : "Aaditya",
+//   age : 20,
+//   greet(){
+//     console.log("This is a People Object");
+//   }
+// }
+// people.greet()
+// type User = {
+//   firstName : string;
+//   goodness : string;
+// }
+// type Admin = {
+//   firstName : string;
+//   badness : string
+// }
+// const a: User = {
+//   firstName: "Aaditya",
+//   goodness: "Very Good",
+// };
+// const b: Admin = {
+//   firstName: "Harsha",
+//   badness: "Very Bad",
+// };
+// function call(user : User | Admin) : string {
+//   return user.firstName
+// }
+// console.log(call(a));
+// console.log(call(b));

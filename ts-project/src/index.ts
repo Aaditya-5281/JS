@@ -32,16 +32,16 @@
 
 // logName(firstName)
 
-function user(user: { firstName: string; age: number }): void {
-  console.log(`Hello ${user.firstName}`);
-}
+// function user(user: { firstName: string; age: number }): void {
+//   console.log(`Hello ${user.firstName}`);
+// }
 
-// Types
+// // Types
 
-let username = {
-  firstName: "Aaditya",
-  age: 20,
-};
+// let username = {
+//   firstName: "Aaditya",
+//   age: 20,
+// };
 
 // Both are Max Same , Minor Difference
 
@@ -107,6 +107,15 @@ let username = {
 // }
 // console.log(call(a));
 // console.log(call(b));
+
+
+
+
+
+
+
+
+
 
 
 
